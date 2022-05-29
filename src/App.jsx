@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'  
 import useContentful from './useContentful'
-import GuideCard from './guideCard'
+import GuideCard from './GuideCard'
 import styled from "styled-components"
 
 const App = () => {
