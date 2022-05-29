@@ -33,11 +33,14 @@ export default App
 
 const Wrapper = styled.div`
   font-family: "Barlow";
-  margin: 40px;
-
-  display: grid;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
   row-gap: 20px;
   justify-content: center;
+  @media (max-width: 768px) {
+  column-gap: 20px;
+  }
 `;
 
 const TitleWrapper = styled.div`
