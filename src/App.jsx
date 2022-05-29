@@ -34,12 +34,14 @@ export default App
 const Wrapper = styled.div`
   font-family: "Barlow";
   margin: 10px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   row-gap: 20px;
   justify-content: center;
-  @media (max-width: 768px) {
-  column-gap: 20px;
+  align-items: center;
+ 
+  
+
+  
   }
 `;
 

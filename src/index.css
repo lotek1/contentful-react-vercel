@@ -8,4 +8,12 @@ body {
   background-image: url('background.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
+  
+
+}
+@media (max-width: 768px) {
+  body {
+    background-image: none;
+  }
+  
 }
