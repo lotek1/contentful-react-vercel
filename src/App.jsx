@@ -17,7 +17,7 @@ const [entries, setEntries] = useState([])
   <Wrapper>
     <TitleWrapper>
       <h3> Contentful // React // Vercel </h3>
-      <p>Climbing guide for everyone</p>
+      <p>Climbing guide for (no-)one</p>
     </TitleWrapper>  
       {entries.map(entry => { 
         return (
