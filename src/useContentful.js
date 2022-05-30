@@ -2,8 +2,8 @@ import { createClient } from "contentful";
 
 const useContentful = () => {
   const client = createClient({
-    space: "u9dniwme39z5",
-    accessToken: "Ou75guPTL5mbQKjTGB805LZnXyXeeEVagVp2IoqlACM",
+    space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
+    accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_KEY,
   });
 
   const getGuides = async () => {
