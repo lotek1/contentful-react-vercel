@@ -14,7 +14,7 @@ const useContentful = () => {
 
       return entries.items;
     } catch (error) {
-      console.log(`Error fetching reviews: ${error}`);
+      console.log(`Error fetching guides: ${error}`);
     }
   };
   return { getGuides };

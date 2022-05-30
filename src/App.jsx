@@ -1,56 +1,18 @@
-import React, { useState, useEffect } from 'react'  
-import useContentful from './useContentful'
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import GuideCard from './GuideCard'
-import styled from "styled-components"
-
+import GuideDetail  from './guide/[slug]'
 const App = () => {
-const [entries, setEntries] = useState([])
-  const {getGuides} = useContentful()
-
-  useEffect(() => {
-    getGuides().then(data => {
-      setEntries (data)
-    })
-  }, [])
 
   return (
-  <Wrapper>
-    <TitleWrapper>
-      <h3> Contentful // React // Vercel </h3>
-      <p>Climbing guide for (no-)one</p>
-    </TitleWrapper>  
-      {entries.map(entry => { 
-        return (
-          <GuideCard key={entry.sys.id} guides={entry.fields}/>
-        )
-      })}
-  </Wrapper>
+    <Router>
+    <Routes>
+      <Route path="/" element={<GuideCard />} />
+      <Route path="/guide/:slug" element={<GuideDetail />} />
+    </Routes>
+  </Router>
   )
 }
 
 
 export default App
-
-const Wrapper = styled.div`
-  font-family: "Barlow";
-  margin: 10px;
-  display: grid;
-  row-gap: 20px;
-  justify-content: center;
-  align-items: center;
- 
-  
-
-  
-  }
-`;
-
-const TitleWrapper = styled.div`
-  * {
-    margin: 0;
-  }
-
-  display: grid;
-  row-gap: 10px;
-`;
 

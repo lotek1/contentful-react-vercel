@@ -1,19 +1,57 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
+import useContentful from "./useContentful";
 
-const GuideCard = ({ guides }) => {
+const GuideCard = () => {
+  const [entries, setEntries] = useState([])
+  const {getGuides} = useContentful()
+
+  useEffect(() => {
+    getGuides().then(data => {
+      setEntries (data)
+    })
+  }, [])
+
+  
   return (
-    <Wrapper background={guides.thumbnail.fields.file.url}>
+    <div>
+      <h1>Guides</h1>
+      {entries.map((entry) => {
+        const {fields} = entry
+        
+        return (
+<Main key={entry.sys.id}>
+
+    <Wrapper background={fields.thumbnail.fields.file.url}>
       <TextContainer>
-        <Title>{guides.header}</Title>
-        <Subtitle>{guides.content}</Subtitle>
+        <Link to={`/guide/${fields.slug}`}>
+        <Title>{fields.header}</Title>
+        </Link>
+        
       </TextContainer>
-    </Wrapper>
+      
+    </Wrapper> 
+    </Main>
+        )
+      })}
+    </div>
   );
 };
 
 export default GuideCard;
 
+const Main = styled.div`
+font-family: "Barlow";
+  margin: 10px;
+  display: grid;
+  row-gap: 20px;
+  justify-content: center;
+  align-items: center;
+
+`;
 const Wrapper = styled.div`
+
   display: grid;
   align-items: flex-end;
   width: 400px;
