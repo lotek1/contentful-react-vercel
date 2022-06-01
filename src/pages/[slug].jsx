@@ -32,6 +32,9 @@ const time = formatDistance(new Date(), new Date(entry.sys.createdAt))
         </Content>
       </Wrapper>
     </Main>
+    <footer>
+        <p>Climbing {new Date().getFullYear()} {'\u00b0'}and All That Jazz</p>
+    </footer>
     </div>
   );
 };

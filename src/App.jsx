@@ -3,7 +3,7 @@ import GuideCard from './pages/GuideCard'
 import GuideDetail  from './pages/[slug]'
 import NotFound from './pages/NotFound'
 const App = () =>  (
-    <Router>
+  <Router>
     <Routes>
       <Route path="/" element={<GuideCard />} />
       <Route path="/page/:slug" element={<GuideDetail />} />
