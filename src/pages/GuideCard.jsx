@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
-import useContentful from "./useContentful";
+import useContentful from "../useContentful";
 
 const GuideCard = () => {
   const [entries, setEntries] = useState([])
+  const [filter, setFilter] = useState('')
   const {getGuides} = useContentful()
 
   useEffect(() => {
@@ -12,27 +13,30 @@ const GuideCard = () => {
       setEntries (data)
     })
   }, [])
+  if (entries.length === 0) {
+    return <div>Loading...</div>
+  }
+  const filteredEntries = entries.filter(entry => {
+    return entry.fields.header.toLowerCase().includes(filter.toLowerCase())
+  })
 
-  
   return (
     <div>
       <h1>Guides</h1>
-      {entries.map((entry) => {
+      <input className="search" type="text" placeholder="Search Guides" value={filter} onChange={({target}) => setFilter(target.value)}/>
+      {filteredEntries.map((entry) => {
         const {fields} = entry
         
         return (
-<Main key={entry.sys.id}>
-
+  <Main key={entry.sys.id}>
     <Wrapper background={fields.thumbnail.fields.file.url}>
       <TextContainer>
-        <Link to={`/guide/${fields.slug}`}>
+        <Link to={`/page/${fields.slug}`}>
         <Title>{fields.header}</Title>
-        </Link>
-        
+        </Link> 
       </TextContainer>
-      
     </Wrapper> 
-    </Main>
+  </Main>
         )
       })}
     </div>
@@ -74,7 +78,7 @@ const TextContainer = styled.div`
   a:link,
   a:visited {
     text-decoration: none;
-    color: #000;
+    color: #fff;
   }
   :hover {
     height: fit-content;
@@ -93,7 +97,7 @@ const Title = styled.p`
   font-size: 20px;
   margin: 0;
   font-weight: bold;
-  color: #000000;
+  color: #fff;
   margin: 0px;
 `;
 
@@ -101,7 +105,7 @@ const Subtitle = styled.p`
   font-weight: normal;
   font-size: 12px;
   font-style: italic;
-  color: rgba(0, 0, 0, 0.7);
+  color: #fff;
   margin: 0px;
   visibility: hidden;
   display: none;

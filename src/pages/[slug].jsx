@@ -1,17 +1,16 @@
 import {useState, useEffect} from 'react';
-import useContentful from ".././useContentful";
+import useContentful from "../useContentful";
 import { useParams, Link } from "react-router-dom";
 import styled from 'styled-components';
+import {formatDistance} from 'date-fns'
 
 const GuideDetail = () => {
   const { slug } = useParams();
   const {getGuides} = useContentful();
   const [entries, setEntries] = useState([])
-  
 
   useEffect(() => {
     getGuides().then(data => {
-      
       setEntries (data)
     })
   }, [])
@@ -19,21 +18,21 @@ if (entries.length === 0) {
   return <div>Loading...</div>
 }
 const entry = entries.find(entry => entry.fields.slug === slug)
-console.log(entry)
-
+const {fields} = entry
+const time = formatDistance(new Date(), new Date(entry.sys.createdAt))
   return (
-      <div>
-          <Link to="/" style={linkStyle}><h1>Back</h1></Link>
+    <div>
+      <Link to="/" style={linkStyle}><h1>Back</h1></Link>
     <Main>  
-      <Wrapper background={entry.fields.image.fields.file.url}>
+      <Wrapper background={fields.image.fields.file.url}>
         <Content>
-          <p>{entry.fields.header}</p>
-          {entry.fields.content}
+          <p>{fields.header}</p>
+          <p>{fields.content}</p>
+          <p>{time} ago</p>
         </Content>
       </Wrapper>
     </Main>
     </div>
-  
   );
 };
 
@@ -51,10 +50,9 @@ font-family: "Barlow";
   row-gap: 20px;
   justify-content: center;
   align-items: center;
-
 `;
-const Wrapper = styled.div`
 
+const Wrapper = styled.div`
   display: grid;
   align-items: flex-end;
   width: 500px;
@@ -72,7 +70,5 @@ const Content = styled.div`
   padding: 20px;
   font-size: 20px;
   font-style: italic;
-  color: rgba(0, 0, 0, 0.7);
-  margin: 0px;
-  
+  color: #fff;
 `;
