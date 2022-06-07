@@ -19,7 +19,7 @@ const GuideCard = () => {
 const filteredEntries = entries.filter(entry => {
   return entry.fields.header?.toLowerCase().includes(filter.toLowerCase())
 })
-
+console.log(user?.email)
   return (
     <>
     {!isLoading && !user && (
@@ -27,7 +27,7 @@ const filteredEntries = entries.filter(entry => {
       Login
    </button>
    )}
-    {!isLoading && user?.name && (
+    {!isLoading && user && (
     <> <button className="button" onClick={() => logout()}>
       Logout
     </button>
@@ -36,7 +36,7 @@ const filteredEntries = entries.filter(entry => {
     )}
       <input className="search" type="text" placeholder="Search Guides" value={filter} onChange={({ target }) => setFilter(target.value) } />
       
-      {filteredEntries.map((entry) => {
+      {filteredEntries?.map((entry) => {
         const {fields} = entry
         
         return (
