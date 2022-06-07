@@ -19,7 +19,6 @@ const GuideCard = () => {
 const filteredEntries = entries.filter(entry => {
   return entry.fields.header?.toLowerCase().includes(filter.toLowerCase())
 })
-console.log(user?.email)
   return (
     <>
     {!isLoading && !user && (
