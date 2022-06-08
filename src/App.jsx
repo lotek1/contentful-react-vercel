@@ -10,7 +10,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<GuideCard />} />
       <Route path="/guide/:slug" element={<GuideDetail />} />
-      <Route path="404" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
     </Auth0ProviderWithHistory>
   </Router>
